@@ -12,8 +12,8 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 data = conn.read()
 
-# Create a Folium map centered at the first location
-m = folium.Map(location=[data['lat'][1], data['lon'][1]], zoom_start=12)
+# Create a Folium map centered at the US
+m = folium.Map(location=[38.79, -99.53], zoom_start=5)
 
 # Function to create an interactive popup that simulates navigation
 def create_popup_html(name, info, image_url):
@@ -44,6 +44,6 @@ for _, row in data.iterrows():
     ).add_to(m)
 
 
-st.title("Example Map")
-st.write("Click on a marker to see details.")
-st_folium(m, width=1050, height=500)
+st.title("Explore the Map")
+st.write("Click on a marker to view story details.")
+st_folium(m, width=1560, height=650)
