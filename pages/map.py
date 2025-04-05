@@ -33,8 +33,24 @@ def create_popup_html(name, info, image_url):
     """
     return popup_html
 
+# Filtering function
+unique_fields = data['field'].unique()
+
+selected_fields = st.multiselect(
+    'Select fields to display on the map:',
+    unique_fields,
+    default=unique_fields  # Show all by default
+)
+
+if not selected_fields:
+    selected_fields = unique_fields
+
+# Filter data based on the selected fields
+filtered_data = data[data['field'].isin(selected_fields)]
+
+
 # Add markers with the improved popups
-for _, row in data.iterrows():
+for _, row in filtered_data.iterrows():
     iframe = IFrame(create_popup_html(row["name"], row["text"], row["img"]), width=300, height=200)
     
     folium.Marker(
