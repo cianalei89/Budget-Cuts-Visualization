@@ -65,7 +65,7 @@ st.write("Click on a marker to view story details.")
 st_folium(m, width=1560, height=650)
 
 st.header("Share Your Story")
-st.writetext("Use our submission form below to have your story featured on the map.")
+st.write("Use our submission form below to have your story featured on the map.")
 
 name = st.text_input("What is your name? (Anonymous is okay)")
 institution = st.text_input("What is your affiliated institution?")
