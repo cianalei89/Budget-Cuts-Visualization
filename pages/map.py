@@ -47,3 +47,28 @@ for _, row in data.iterrows():
 st.title("Explore the Map")
 st.write("Click on a marker to view story details.")
 st_folium(m, width=1560, height=650)
+
+st.header("Share Your Story")
+st.writetext("Use our submission form below to have your story featured on the map.")
+
+name = st.text_input("What is your name? (Anonymous is okay)")
+institution = st.text_input("What is your affiliated institution?")
+location = st.text_input("Where are you located?")
+info = st.text_input("Please share any information you would like us to share!")
+
+# st.success("Your story has been successfully submited, we will review it shortly!")
+
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+
+creds = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\ciben\a330_project\budget-cuts-vis-0f950ec71da8.json", scope)
+client = gspread.authorize(creds)
+ 
+sh = client.open('submissions')
+
+if st.button("Submit Your Story"):
+    row = [name,info, institution, location]
+    worksheet = sh.sheet1
+    worksheet.append_row(row)
+    st.success("Your story has been successfully submited, we will review it shortly!")
