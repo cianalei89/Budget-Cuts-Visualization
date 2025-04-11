@@ -72,8 +72,6 @@ institution = st.text_input("What is your affiliated institution?")
 location = st.text_input("Where are you located?")
 info = st.text_input("Please share any information you would like us to share!")
 
-# st.success("Your story has been successfully submited, we will review it shortly!")
-
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
