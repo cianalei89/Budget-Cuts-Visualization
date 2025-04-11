@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 from folium import IFrame
 
-# Load data from CSV
+# Load data from google sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 data = conn.read()
@@ -71,8 +71,6 @@ name = st.text_input("What is your name? (Anonymous is okay)")
 institution = st.text_input("What is your affiliated institution?")
 location = st.text_input("Where are you located?")
 info = st.text_input("Please share any information you would like us to share!")
-
-# st.success("Your story has been successfully submitted, we will review it shortly!")
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials

@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 from folium import IFrame
 
-st.title("Search our Database:")
+st.title("Search our Database of Stories:")
 
 # load data from google sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
