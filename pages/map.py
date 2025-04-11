@@ -80,9 +80,7 @@ scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/au
 from io import StringIO
 
 # Get the credentials dict from Streamlit secrets
-creds_dict = st.secrets["api_key"]  # or whatever you named your section
-
-# Convert the dict to a JSON string, then to a file-like object
+creds_dict = st.secrets["api_key"] 
 creds_json = json.dumps(creds_dict)
 creds_stream = StringIO(creds_json)
 creds = ServiceAccountCredentials.from_json_keyfile_name(json.loads(creds_json), scopes)
