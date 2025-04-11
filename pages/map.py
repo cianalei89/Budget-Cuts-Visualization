@@ -73,6 +73,7 @@ state = st.text_input("What state are you located in?")
 city = st.text_input("What city are you located in?")
 field = st.text_input("What is your field of research?")
 info = st.text_input("Please share any information you would like us to share!")
+email = st.text_input("Please share an email we can contact you at")
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -84,7 +85,7 @@ client = gspread.authorize(creds)
 sh = client.open('submissions')
 
 if st.button("Submit Your Story"):
-    row = [name,info, institution, state, city, field]
+    row = [name,info, institution, state, city, field, email]
     worksheet = sh.sheet1
     worksheet.append_row(row)
     st.success("Your story has been successfully submited, we will review it shortly!")
