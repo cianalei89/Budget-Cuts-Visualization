@@ -79,7 +79,17 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\ciben\a330_project\budget-cuts-vis-0f950ec71da8.json", scope)
+from io import StringIO
+import json
+
+creds_dict = dict(st.secrets["apikey"])  # ✅ this is the key fix
+
+# Now it's safe to dump to JSON
+creds_json = json.dumps(creds_dict)
+creds_stream = StringIO(creds_json)
+
+# Load credentials from the dict
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
  
 sh = client.open('submissions')
