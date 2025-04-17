@@ -82,7 +82,7 @@ scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/au
 from io import StringIO
 import json
 
-creds_dict = dict(st.secrets["apikey"])  # ✅ this is the key fix
+creds_dict = dict(st.secrets["apikey"])
 
 # Now it's safe to dump to JSON
 creds_json = json.dumps(creds_dict)
