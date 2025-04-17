@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 from folium import IFrame
 
-# Load data from CSV
+# Load data from google sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 data = conn.read()
