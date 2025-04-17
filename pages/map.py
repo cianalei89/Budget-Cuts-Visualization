@@ -33,26 +33,44 @@ def create_popup_html(name, info, image_url):
     """
     return popup_html
 
-# Filtering function
-unique_fields = data['field'].unique()
 
+st.title("Explore the Map")
+
+# Field Filtering function
+unique_fields = data['field'].unique().tolist()
+
+# Initialize session state if not present
+if "selected_fields" not in st.session_state:
+    st.session_state.selected_fields = unique_fields.copy()
+
+# Multiselect box to choose fields
 selected_fields = st.multiselect(
     'Select fields to display on the map:',
     unique_fields,
-    default=unique_fields  # Show all by default
+    default=st.session_state.selected_fields
 )
 
-if not selected_fields:
-    selected_fields = unique_fields
+# update session state if changed manually via multiselect
+if selected_fields != st.session_state.selected_fields:
+    st.session_state.selected_fields = selected_fields
 
-# Filter data based on the selected fields
-filtered_data = data[data['field'].isin(selected_fields)]
+# add select/deselect all buttons
+btn_col1, btn_col2, _ = st.columns([1, 1, 8])
+with btn_col1:
+    if st.button("Select All"):
+        st.session_state.selected_fields = unique_fields.copy()
+        st.rerun()
+with btn_col2:
+    if st.button("Deselect All"):
+        st.session_state.selected_fields = []
+        st.rerun()
 
+# filter the data based on selections
+filtered_data = data[data['field'].isin(st.session_state.selected_fields)]
 
-# Add markers with the improved popups
+# Add markers
 for _, row in filtered_data.iterrows():
     iframe = IFrame(create_popup_html(row["name"], row["text"], row["img"]), width=300, height=200)
-    
     folium.Marker(
         location=[row["lat"], row["lon"]],
         popup=folium.Popup(iframe, max_width=300),
@@ -60,8 +78,9 @@ for _, row in filtered_data.iterrows():
     ).add_to(m)
 
 
-st.title("Explore the Map")
 st.write("Click on a marker to view story details.")
+
+# Show Map
 st_folium(m, width=1560, height=650)
 
 st.header("Share Your Story")
@@ -73,7 +92,7 @@ state = st.text_input("What state are you located in?")
 city = st.text_input("What city are you located in?")
 field = st.text_input("What is your field of research?")
 info = st.text_input("Please share any information you would like us to share!")
-email = st.text_input("Please share an email we can contact you at")
+email = st.text_input("Please share an email we can use to contact you")
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials

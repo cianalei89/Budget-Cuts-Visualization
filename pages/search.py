@@ -50,7 +50,7 @@ else:
         st.markdown(f"{row['field']}")
         st.markdown(f"*{row['text']}*")
 
-    # page navigation buttons for displaying >5 entries
+    # page navigation buttons for displaying > "ENTRIES_PER_PAGE" number of entries
     st.write("---")
     col1, col2, col3 = st.columns([1, 2, 1])
 
