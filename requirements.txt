@@ -5,4 +5,5 @@ gspread
 datetime
 streamlit_folium
 streamlit-gsheets
+st-gsheets-connection
 git+https://github.com/streamlit/gsheets-connection
