@@ -7,7 +7,7 @@ from folium import IFrame
 import time
 
 st.set_page_config(layout="wide", initial_sidebar_state = "collapsed")
-st.title("Welcome to Project _____")
+st.title("Welcome to the Stories of Science Project")
 st.write(" ")
 # st.write("We will add context and information and other here!")
 

@@ -84,7 +84,9 @@ st.write("Click on a marker to view story details.")
 st_folium(m, width=1560, height=650)
 
 st.header("Share Your Story")
-st.write("Use our submission form below to have your story featured on the map.")
+st.write("Use our submission form below to share your story. " \
+"Each submission will be reviewed before being added to the database. " \
+"Submissions with false or incomplete information will be discarded. ")
 
 name = st.text_input("What is your name? (Anonymous is okay)")
 institution = st.text_input("What is your affiliated institution?")
@@ -145,7 +147,7 @@ state = st.selectbox(
     ),
 )
 city = st.text_input("What city are you located in?")
-zipcode = st.text_input("What is your zipcode?")
+zipcode = st.text_input("What is your zipcode (used for map placement) ?")
 field = st.text_input("What is your field of research?")
 info = st.text_input("Please share your story here")
 email = st.text_input("Please share an email we can use to contact you")
