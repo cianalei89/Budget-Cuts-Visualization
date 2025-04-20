@@ -3,3 +3,4 @@ folium
 gspread
 time
 datetime
+streamlit_folium
