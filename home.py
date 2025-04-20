@@ -1,6 +1,7 @@
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from folium import IFrame
 import time
@@ -89,6 +90,5 @@ with side1:
 
 with side2:
     st.header("This is a story")
-
 
     
