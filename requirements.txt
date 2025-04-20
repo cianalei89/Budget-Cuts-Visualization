@@ -3,4 +3,4 @@ folium
 gspread
 datetime
 streamlit_folium
-streamlit_gsheets
+streamlit-gsheets
