@@ -7,4 +7,4 @@ import pandas as pd
 from folium import IFrame
 
 st.title("About the Project")
-st.write("We are Ciana and Mahitha. Write about the project here")
+st.write("")

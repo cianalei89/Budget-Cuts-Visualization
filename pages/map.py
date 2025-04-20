@@ -91,7 +91,7 @@ institution = st.text_input("What is your affiliated institution?")
 state = st.text_input("What state are you located in?")
 city = st.text_input("What city are you located in?")
 field = st.text_input("What is your field of research?")
-info = st.text_input("Please share any information you would like us to share!")
+info = st.text_input("Please share your story here")
 email = st.text_input("Please share an email we can use to contact you")
 
 import gspread
