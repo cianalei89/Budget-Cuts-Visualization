@@ -1,7 +1,7 @@
 # Search Page
 
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
+from gsheets_connection import GSheetsConnection
 import folium
 from streamlit_folium import st_folium
 import pandas as pd
