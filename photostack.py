@@ -112,19 +112,19 @@ def photostack(image_url1,image_url2,image_url3):
     <button onclick="openPopover('photo1')">
         <figure>
         <img src={image_url1} alt="">
-        <figcaption>caption 1</figcaption>
+        <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
     <button onclick="openPopover('photo2')">
         <figure>
         <img src={image_url2} alt="">
-        <figcaption>caption 2</figcaption>
+        <figcaption>Federal Workers Put on Leave/In Limbo</figcaption>
         </figure>
     </button>
     <button onclick="openPopover('photo3')">
         <figure>
         <img src={image_url3} alt="">
-        <figcaption>caption 3</figcaption>
+        <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
     </div>
@@ -134,7 +134,7 @@ def photostack(image_url1,image_url2,image_url3):
     <div class="popover" id="photo1">
     <figure>
         <img src={image_url1} alt="">
-        <figcaption>big caption 1</figcaption>
+        <figcaption>Testimony from theimpactproject.org</figcaption>
         <button class="close-btn" onclick="closePopover('photo1')">Close</button>
     </figure>
     </div>
@@ -142,7 +142,7 @@ def photostack(image_url1,image_url2,image_url3):
     <div class="popover" id="photo2">
     <figure>
         <img src={image_url2} alt="">
-        <figcaption>big caption 2</figcaption>
+        <figcaption>Testimony from theimpactproject.org</figcaption>
         <button class="close-btn" onclick="closePopover('photo2')">Close</button>
     </figure>
     </div>
@@ -150,7 +150,7 @@ def photostack(image_url1,image_url2,image_url3):
     <div class="popover" id="photo3">
     <figure>
         <img src={image_url3} alt="">
-        <figcaption>big caption 3</figcaption>
+        <figcaption>Testimony from theimpactproject.org</figcaption>
         <button class="close-btn" onclick="closePopover('photo3')">Close</button>
     </figure>
     </div>

@@ -88,8 +88,64 @@ st.write("Use our submission form below to have your story featured on the map."
 
 name = st.text_input("What is your name? (Anonymous is okay)")
 institution = st.text_input("What is your affiliated institution?")
-state = st.text_input("What state are you located in?")
+
+state = st.selectbox(
+    "What state are you located in?",
+    ("Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District of Columbia",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+    ),
+)
 city = st.text_input("What city are you located in?")
+zipcode = st.text_input("What is your zipcode?")
 field = st.text_input("What is your field of research?")
 info = st.text_input("Please share any information you would like us to share!")
 email = st.text_input("Please share an email we can use to contact you")
