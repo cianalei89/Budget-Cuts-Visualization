@@ -1,9 +1,8 @@
-streamlit==1.34.0
+streamlit==1.27.2
 pandas
 folium
 gspread
 datetime
 streamlit_folium
 pandasql
-st-gsheets-connection
 git+https://github.com/streamlit/gsheets-connection
