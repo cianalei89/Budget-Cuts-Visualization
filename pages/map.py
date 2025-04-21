@@ -1,7 +1,7 @@
 # Map Page
 
 import streamlit as st
-from gsheets_connection import GSheetsConnection
+from streamlit_gsheets import GSheetsConnection
 import folium
 from streamlit_folium import st_folium
 import pandas as pd
