@@ -172,7 +172,7 @@ client = gspread.authorize(creds)
 sh = client.open('submissions')
 
 if st.button("Submit Your Story"):
-    row = [name,info, institution, state, city, field, email]
+    row = [name, info, institution, state, city, field, zipcode, email]
     worksheet = sh.sheet1
     worksheet.append_row(row)
     st.success("Your story has been successfully submited, we will review it shortly!")

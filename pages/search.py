@@ -18,7 +18,7 @@ text_search = st.text_input("Search stories by institution, field, or state:", v
 
 # filter data by the search input
 if text_search:
-    m1 = data["name"].str.contains(text_search, case=False, na=False)
+    m1 = data["institution"].str.contains(text_search, case=False, na=False)
     m2 = data["field"].str.contains(text_search, case=False, na=False)
     m3 = data["state"].str.contains(text_search, case=False, na=False)
     data_search = data[m1 | m2 | m3]
