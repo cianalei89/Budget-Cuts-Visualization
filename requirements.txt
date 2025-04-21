@@ -4,4 +4,5 @@ folium
 gspread
 datetime
 streamlit_folium
+pandasql
 git+https://github.com/streamlit/gsheets-connection
