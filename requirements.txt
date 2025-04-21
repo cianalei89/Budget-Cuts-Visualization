@@ -5,4 +5,5 @@ gspread
 datetime
 streamlit_folium
 oauth2client
+pandasql
 git+https://github.com/streamlit/gsheets-connection
