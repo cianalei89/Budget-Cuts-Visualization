@@ -3,26 +3,31 @@ def photostack(image_url1,image_url2,image_url3):
 
     st.components.v1.html(f"""
     <style>
+    body {{
+        margin: 0;
+        padding-top: 5px;
+    }}
     .photopile {{
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-        max-width: 100%;
-        margin-top: 30px;
+        margin: 10px 0 10px 0;
     }}
 
     .photopile figure {{
         display: inline-block;
         background: #e3cfbc;
         box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.75);
-        margin: 0 -25px;
+        margin: -10px -25px 0 -15px;
         transition: transform 0.2s;
-        transform: scale(1) rotate(2deg);
+        transform: scale(0.7) rotate(2deg);
+        transform-origin: top center;
     }}
 
+
     .photopile figure img {{
-        max-width: calc(100%);
+        max-width: 400px;
         margin: 1rem 1rem 0 1rem;
         border: none;
     }}
@@ -37,7 +42,7 @@ def photostack(image_url1,image_url2,image_url3):
     .photopile button {{
         background: none;
         border: none;
-        max-width: 80%;
+        max-width: 300px;
         cursor: pointer;
     }}
 
@@ -56,10 +61,9 @@ def photostack(image_url1,image_url2,image_url3):
     }}
 
     .photopile button:hover figure {{
-        transform: scale(1.1);
+        transform: scale(.8);
         z-index: 10;
-        }}
-
+    }}
 
     .photopile button:nth-child(2n) {{ transform: rotate(-10deg); }}
     .photopile button:nth-child(3n) {{ transform: rotate(5deg); }}
@@ -123,7 +127,7 @@ def photostack(image_url1,image_url2,image_url3):
     </button>
     <button onclick="openPopover('photo3')">
         <figure>
-        <img src={image_url3} alt="">
+        <img src={image_url3} alt=" "style="max-height: 420px;>
         <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
@@ -149,7 +153,7 @@ def photostack(image_url1,image_url2,image_url3):
     <div class="overlay" id="overlay3" onclick="closePopover('photo3')"></div>
     <div class="popover" id="photo3">
     <figure>
-        <img src={image_url3} alt="">
+        <img src={image_url3} alt="" "style="max-height: 420px;>
         <figcaption>Testimony from theimpactproject.org</figcaption>
         <button class="close-btn" onclick="closePopover('photo3')">Close</button>
     </figure>
@@ -166,4 +170,4 @@ def photostack(image_url1,image_url2,image_url3):
         document.getElementById("overlay" + id.replace("photo", "")).classList.remove("active");
     }}
     </script>
-    """, height=500)    
+    """, height=400)    
