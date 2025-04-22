@@ -94,7 +94,7 @@ if 'i' not in st.session_state:
 side1, side2 = st.columns(2)
     
 with side2:
-    st.header("Across the nation, professors and students are speaking out about these cuts.")
+    st.header("Across the nation, professors and students are speaking out.")
     a,b=st.columns(2)
     with a:
         if st.button("Next"):
