@@ -46,7 +46,7 @@ if current_data.empty:
 else:
     for n_row, row in current_data.reset_index().iterrows():
         st.write("---")
-        st.markdown(f"**{row['name']}** - {row['city']}, {row['state_abb']}")
+        st.markdown(f"**{row['institution']}** - {row['city']}, {row['state_abb']}")
         st.markdown(f"{row['field']}")
         st.markdown(f"*{row['text']}*")
 

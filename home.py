@@ -97,13 +97,13 @@ with side2:
     st.header("Across the nation, professors and students are speaking out.")
     a,b,_=st.columns([2, 2, 6])
     with b:
-        if st.button("Next ->"):
+        if st.button("Next ➡"):
             if st.session_state.i < len(df) - 1:  
                 st.session_state.i += 1  
             else:
                 st.warning("You have reached the last item.")
     with a:
-        if st.button("<- Back"):
+        if st.button("⬅ Previous"):
             if st.session_state.i > 0:  
                 st.session_state.i -= 1  
             else:
