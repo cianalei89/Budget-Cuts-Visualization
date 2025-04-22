@@ -41,10 +41,9 @@ START_DATE = datetime.date(2025, 1, 20)
 date_animation(START_DATE)
 
 from photostack import photostack
-
-image_url1 = "https://i.postimg.cc/Gmt2DWrf/Screenshot-2025-04-16-122811.png"
-image_url2 = "https://i.postimg.cc/NfpF5shT/screenshot.png"
-image_url3 = "https://i.postimg.cc/zfRGtTyS/Screenshot-2025-04-16-123142.png"
+image_url1 = "https://i.postimg.cc/0jxwm8km/screenshot.png"
+image_url2 = "https://i.postimg.cc/xCLmck2n/Screenshot-2025-04-16-122811.png"
+image_url3 = "https://i.postimg.cc/D0gbPt0N/Screenshot-2025-04-16-123142.png"
 photostack(image_url1,image_url2,image_url3)
 #map storytelling
 from streamlit_gsheets import GSheetsConnection
@@ -58,52 +57,79 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 data = conn.read()
 
 # Function to create an interactive popup that simulates navigation
+def create_popup_html(name, info, image_urls):
+    image_list = image_urls.split(',') if isinstance(image_urls, str) else image_urls
+    popup_html = f"""
+    <div id="popup-main" style="width: 250px;">
+        <h4>{name}</h4>
+        <p>{info}</p>
+        <img src="{image_list[0]}" width="100%">
+        <img src="{image_list[1]}" width = "100%">
+        <br><a href="#" onclick="document.getElementById('popup-main').style.display='none';document.getElementById('popup-more').style.display='block';">Click for more</a>
+    </div>
 
+    <div id="popup-more" style="width: 250px; display: none;">
+        <h4>More about {name}</h4>
+        <p>Here is additional information about this location.</p>
+        <img src="{image_list[2]}" width = "100%">
+        <a href="#" onclick="document.getElementById('popup-more').style.display='none';document.getElementById('popup-main').style.display='block';">Back</a>
+    </div>
+    """
+    return popup_html
 
 
 
 sheet_name = "Data for Visualization"  
-tab = "Universities" # tab name
+tab = "Universities"  # tab name
+
+# Fetch data from Google Sheets if not already in session
 if 'data' not in st.session_state:
-# If not cached, fetch data from Google Sheets
-    st.session_state.data = get_sheet(sheet_name,tab)
+    st.session_state.data = get_sheet(sheet_name, tab)
 
-df = st.session_state.data  # Use the cached data
+df = st.session_state.data  # Use cached data
 
-m = map_with_popups(sheet_name,tab,df)
+# Initialize story index
 if 'i' not in st.session_state:
     st.session_state.i = 0
 
+# Generate map with popups
+m = map_with_popups(sheet_name, tab, df)
+
 side1, side2 = st.columns(2)
-    
+
 with side2:
     st.header("Across the nation, professors and students are speaking out.")
-    a,b,_=st.columns([2, 2, 6])
-    with b:
-        if st.button("Next ➡"):
-            if st.session_state.i < len(df) - 1:  
-                st.session_state.i += 1  
-            else:
-                st.warning("You have reached the last item.")
+    
+    a, b, spacer = st.columns([2, 2, 6])  # Adjust as needed for spacing
+
     with a:
         if st.button("⬅ Previous"):
-            if st.session_state.i > 0:  
-                st.session_state.i -= 1  
-            else:
-                st.warning("You are already at the first item.")
+            st.session_state.i = (st.session_state.i - 1) % len(df)
+
+    with b:
+        if st.button("Next ➡"):
+            st.session_state.i = (st.session_state.i + 1) % len(df)
+
 
     name = df.loc[st.session_state.i, "name"]
     story = df.loc[st.session_state.i, "story"]
     st.write(f"At {name}, {story}")
 
+    st.write("Click on a marker to view photos")
+
+    current = st.session_state.i
+    total = len(df)
+        
+    # Dot tracker with ◌ and ◙
+    dot_line = "".join(
+        "◙ " if i == current else "◌ " for i in range(total)
+    )
+    st.markdown(
+        f"<div style='text-align: center; font-size: 24px;'>{dot_line}</div>",
+        unsafe_allow_html=True
+    )
 
 with side1:
-    m.location = [df.loc[st.session_state.i, "lat"], df.loc[st.session_state.i, "lon"]]  # Update map location
+    # Update map location to current story
+    m.location = [df.loc[st.session_state.i, "lat"], df.loc[st.session_state.i, "lon"]]
     st_folium(m, width=700, height=600)
-    
-
-
-
-
-
-    
