@@ -80,47 +80,55 @@ def create_popup_html(name, info, image_urls):
 
 
 sheet_name = "Data for Visualization"  
-tab = "Universities" # tab name
+tab = "Universities"  # tab name
+
+# Fetch data from Google Sheets if not already in session
 if 'data' not in st.session_state:
-# If not cached, fetch data from Google Sheets
-    st.session_state.data = get_sheet(sheet_name,tab)
+    st.session_state.data = get_sheet(sheet_name, tab)
 
-df = st.session_state.data  # Use the cached data
+df = st.session_state.data  # Use cached data
 
-m = map_with_popups(sheet_name,tab,df)
+# Initialize story index
 if 'i' not in st.session_state:
     st.session_state.i = 0
 
+# Generate map with popups
+m = map_with_popups(sheet_name, tab, df)
+
 side1, side2 = st.columns(2)
-    
+
 with side2:
     st.header("Across the nation, professors and students are speaking out.")
-    a,b,_=st.columns([2, 2, 6])
-    with b:
-        if st.button("Next ➡"):
-            if st.session_state.i < len(df) - 1:  
-                st.session_state.i += 1  
-            else:
-                st.warning("You have reached the last item.")
+    
+    # Create layout: Previous | Tracker | Next | Spacer
+    a, b, spacer = st.columns([2, 2, 6])  # Adjust as needed for spacing
+
     with a:
         if st.button("⬅ Previous"):
-            if st.session_state.i > 0:  
-                st.session_state.i -= 1  
-            else:
-                st.warning("You are already at the first item.")
+            st.session_state.i = (st.session_state.i - 1) % len(df)
+
+    with b:
+        if st.button("Next ➡"):
+            st.session_state.i = (st.session_state.i + 1) % len(df)
+
 
     name = df.loc[st.session_state.i, "name"]
     story = df.loc[st.session_state.i, "story"]
     st.write(f"At {name}, {story}")
 
+    current = st.session_state.i
+    total = len(df)
+        
+    # Dot tracker with ◌ and ◙
+    dot_line = "".join(
+        "◙ " if i == current else "◌ " for i in range(total)
+    )
+    st.markdown(
+        f"<div style='text-align: center; font-size: 24px;'>{dot_line}</div>",
+        unsafe_allow_html=True
+    )
 
 with side1:
-    m.location = [df.loc[st.session_state.i, "lat"], df.loc[st.session_state.i, "lon"]]  # Update map location
+    # Update map location to current story
+    m.location = [df.loc[st.session_state.i, "lat"], df.loc[st.session_state.i, "lon"]]
     st_folium(m, width=700, height=600)
-    
-
-
-
-
-
-    
