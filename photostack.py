@@ -121,13 +121,13 @@ def photostack(image_url1,image_url2,image_url3):
     <button onclick="openPopover('photo1')">
         <figure>
         <img src={image_url1} alt="">
-        <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
+        <figcaption>Federal Workers Put on Leave/In Limbo</figcaption>
         </figure>
     </button>
     <button onclick="openPopover('photo2')">
         <figure>
         <img src={image_url2} alt="">
-        <figcaption>Federal Workers Put on Leave/In Limbo</figcaption>
+        <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
     <button onclick="openPopover('photo3')">

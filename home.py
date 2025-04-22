@@ -42,8 +42,8 @@ date_animation(START_DATE)
 
 from photostack import photostack
 
-image_url1 = "https://i.postimg.cc/NfpF5shT/screenshot.png"
-image_url2 = "https://i.postimg.cc/Gmt2DWrf/Screenshot-2025-04-16-122811.png"
+image_url1 = "https://i.postimg.cc/Gmt2DWrf/Screenshot-2025-04-16-122811.png"
+image_url2 = "https://i.postimg.cc/NfpF5shT/screenshot.png"
 image_url3 = "https://i.postimg.cc/zfRGtTyS/Screenshot-2025-04-16-123142.png"
 photostack(image_url1,image_url2,image_url3)
 #map storytelling
