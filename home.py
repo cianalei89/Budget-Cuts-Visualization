@@ -95,7 +95,7 @@ side1, side2 = st.columns(2)
     
 with side2:
     st.header("Across the nation, professors and students are speaking out.")
-    a,b=st.columns(2)
+    a,b=st.columns([1, 1, 8])
     with a:
         if st.button("Next"):
             if st.session_state.i < len(df) - 1:  
