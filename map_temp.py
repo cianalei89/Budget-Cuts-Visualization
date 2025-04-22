@@ -5,6 +5,7 @@ from streamlit_folium import st_folium
 import pandas as pd
 from folium import IFrame
 
+# function to connect to sheets and return the information from specified sheet and tab
 def get_sheet(spreadsheet_name,tab):
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
@@ -33,24 +34,6 @@ def get_sheet(spreadsheet_name,tab):
 
 def create_popup_html(name, info, image_urls):
     image_list = image_urls.split(',') if isinstance(image_urls, str) else image_urls
-    # for i in range(len(image_list)):
-    #     popup_html = f"""
-    #     <div id="popup-main" style="width: 250px;">
-    #         <h4>{name}</h4>
-    #         <img src="{image_list[i]}" width="100%">
-    #         <img src="{image_list[i+1]}" width = "100%">
-    #         <img src="{image_list[i+2]}" width = "100%">
-    #         <p>{info}</p>
-    #         <br><a href="#" onclick="document.getElementById('popup-main').style.display='none';document.getElementById('popup-more').style.display='block';">Click for more</a>
-    #     </div>
-
-
-    #     <div id="popup-more" style="width: 250px; display: none;">
-    #         <h4>More about {name}</h4>
-    #         <p>Here is additional information about this location.</p>
-    #         <a href="#" onclick="document.getElementById('popup-more').style.display='none';document.getElementById('popup-main').style.display='block';">Back</a>
-    #     </div>
-    #     """
     popup_html = f"""
     <div id="popup-main" style="width: 250px;">
         <h4>{name}</h4>

@@ -84,6 +84,9 @@ def photostack(image_url1,image_url2,image_url3):
         box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.75);
         padding: 1rem;
         text-align: center;
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
     }}
 
     .popover.active {{
@@ -92,6 +95,8 @@ def photostack(image_url1,image_url2,image_url3):
 
     .popover img {{
         width: 50vmin;
+        height: 50vmin;
+        object-fit: contain;
         border: 1px inset #e3c4a6;
         margin-bottom: 1rem;
     }}
@@ -107,7 +112,7 @@ def photostack(image_url1,image_url2,image_url3):
         color: #e3c4a6;
         border: none;
         padding: 0.5rem 1rem;
-        border-radius: 5px;
+        border-radius: 2px;
         cursor: pointer;
     }}
     </style>
@@ -127,7 +132,7 @@ def photostack(image_url1,image_url2,image_url3):
     </button>
     <button onclick="openPopover('photo3')">
         <figure>
-        <img src={image_url3} alt=" "style="max-height: 420px;>
+        <img src={image_url3} alt=" "style="max-height: 500px;>
         <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
@@ -153,7 +158,7 @@ def photostack(image_url1,image_url2,image_url3):
     <div class="overlay" id="overlay3" onclick="closePopover('photo3')"></div>
     <div class="popover" id="photo3">
     <figure>
-        <img src={image_url3} alt="" "style="max-height: 420px;>
+        <img src={image_url3} alt="";>
         <figcaption>Testimony from theimpactproject.org</figcaption>
         <button class="close-btn" onclick="closePopover('photo3')">Close</button>
     </figure>
