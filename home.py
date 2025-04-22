@@ -5,6 +5,8 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from folium import IFrame
 import time
+from map_temp import map_with_popups, get_sheet
+
 
 st.set_page_config(layout="wide", initial_sidebar_state = "collapsed")
 st.title("Welcome to the Stories of Science Project")
@@ -45,7 +47,6 @@ image_url3 = "https://i.postimg.cc/D0gbPt0N/Screenshot-2025-04-16-123142.png"
 photostack(image_url1,image_url2,image_url3)
 #map storytelling
 from streamlit_gsheets import GSheetsConnection
-import folium
 from streamlit_folium import st_folium
 import pandas as pd
 from folium import IFrame
@@ -56,39 +57,70 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 data = conn.read()
 
 # Function to create an interactive popup that simulates navigation
-def create_popup_html(name, info, image_url):
+def create_popup_html(name, info, image_urls):
+    image_list = image_urls.split(',') if isinstance(image_urls, str) else image_urls
     popup_html = f"""
     <div id="popup-main" style="width: 250px;">
         <h4>{name}</h4>
         <p>{info}</p>
-        <img src="{image_url}" width="100%">
-        <br><a href="#" onclick="document.getElementById('popup-main').style.display='none';document.getElementById('popup-more').style.display='block';">More Info</a>
+        <img src="{image_list[0]}" width="100%">
+        <img src="{image_list[1]}" width = "100%">
+        <br><a href="#" onclick="document.getElementById('popup-main').style.display='none';document.getElementById('popup-more').style.display='block';">Click for more</a>
     </div>
 
     <div id="popup-more" style="width: 250px; display: none;">
-        <h4>Details for {name}</h4>
+        <h4>More about {name}</h4>
         <p>Here is additional information about this location.</p>
+        <img src="{image_list[2]}" width = "100%">
         <a href="#" onclick="document.getElementById('popup-more').style.display='none';document.getElementById('popup-main').style.display='block';">Back</a>
     </div>
     """
     return popup_html
 
+
+
+sheet_name = "Data for Visualization"  
+tab = "Universities" # tab name
+if 'data' not in st.session_state:
+# If not cached, fetch data from Google Sheets
+    st.session_state.data = get_sheet(sheet_name,tab)
+
+df = st.session_state.data  # Use the cached data
+
+m = map_with_popups(sheet_name,tab,df)
+if 'i' not in st.session_state:
+    st.session_state.i = 0
+
 side1, side2 = st.columns(2)
+    
+with side2:
+    st.header("Across the nation, professors and students are speaking out about these cuts.")
+    a,b=st.columns(2)
+    with a:
+        if st.button("Next"):
+            if st.session_state.i < len(df) - 1:  
+                st.session_state.i += 1  
+            else:
+                st.warning("You have reached the last item.")
+    with b:
+        if st.button("Back"):
+            if st.session_state.i > 0:  
+                st.session_state.i -= 1  
+            else:
+                st.warning("You are already at the first item.")
+
+    name = df.loc[st.session_state.i, "name"]
+    story = df.loc[st.session_state.i, "story"]
+    st.write(f"At {name}, {story}")
+
 
 with side1:
-    m = folium.Map(location=[38.79, -99.53], zoom_start=5, tiles=None)
+    m.location = [df.loc[st.session_state.i, "lat"], df.loc[st.session_state.i, "lon"]]  # Update map location
+    st_folium(m, width=700, height=600)
+    
 
-    folium.TileLayer(
-        tiles='https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
-        attr='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        name='Stadia Alidade Satellite',
-        min_zoom=0,
-        max_zoom=20
-    ).add_to(m)
 
-    st_folium(m, width=1000, height=500)
 
-with side2:
-    st.header("This is a story")
+
 
     
