@@ -93,7 +93,7 @@ institution = st.text_input("What is your affiliated institution?")
 
 state = st.selectbox(
     "What state are you located in?",
-    ("Choose your state",
+    ("",
     "Alabama",
     "Alaska",
     "Arizona",
