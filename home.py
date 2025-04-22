@@ -41,9 +41,10 @@ START_DATE = datetime.date(2025, 1, 20)
 date_animation(START_DATE)
 
 from photostack import photostack
-image_url1 = "https://i.postimg.cc/0jxwm8km/screenshot.png"
-image_url2 = "https://i.postimg.cc/xCLmck2n/Screenshot-2025-04-16-122811.png"
-image_url3 = "https://i.postimg.cc/D0gbPt0N/Screenshot-2025-04-16-123142.png"
+
+image_url1 = "https://i.postimg.cc/NfpF5shT/screenshot.png"
+image_url2 = "https://i.postimg.cc/Gmt2DWrf/Screenshot-2025-04-16-122811.png"
+image_url3 = "https://i.postimg.cc/zfRGtTyS/Screenshot-2025-04-16-123142.png"
 photostack(image_url1,image_url2,image_url3)
 #map storytelling
 from streamlit_gsheets import GSheetsConnection
@@ -57,25 +58,6 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 data = conn.read()
 
 # Function to create an interactive popup that simulates navigation
-def create_popup_html(name, info, image_urls):
-    image_list = image_urls.split(',') if isinstance(image_urls, str) else image_urls
-    popup_html = f"""
-    <div id="popup-main" style="width: 250px;">
-        <h4>{name}</h4>
-        <p>{info}</p>
-        <img src="{image_list[0]}" width="100%">
-        <img src="{image_list[1]}" width = "100%">
-        <br><a href="#" onclick="document.getElementById('popup-main').style.display='none';document.getElementById('popup-more').style.display='block';">Click for more</a>
-    </div>
-
-    <div id="popup-more" style="width: 250px; display: none;">
-        <h4>More about {name}</h4>
-        <p>Here is additional information about this location.</p>
-        <img src="{image_list[2]}" width = "100%">
-        <a href="#" onclick="document.getElementById('popup-more').style.display='none';document.getElementById('popup-main').style.display='block';">Back</a>
-    </div>
-    """
-    return popup_html
 
 
 
