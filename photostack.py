@@ -80,13 +80,8 @@ def photostack(image_url1,image_url2,image_url3):
         transform: translate(-50%, -50%);
         background: #e3c4a6;
         z-index: 999;
-        border-radius: 5px;
-        box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.75);
-        padding: 1rem;
+        padding: 1px;
         text-align: center;
-        max-width: 90vw;
-        max-height: 90vh;
-        overflow: auto;
     }}
 
     .popover.active {{
@@ -96,7 +91,6 @@ def photostack(image_url1,image_url2,image_url3):
     .popover img {{
         width: 50vmin;
         height: 50vmin;
-        object-fit: contain;
         border: 1px inset #e3c4a6;
         margin-bottom: 1rem;
     }}
@@ -132,7 +126,7 @@ def photostack(image_url1,image_url2,image_url3):
     </button>
     <button onclick="openPopover('photo3')">
         <figure>
-        <img src={image_url3} alt=" "style="max-height: 500px;>
+        <img src={image_url3} alt="">
         <figcaption>Funding Frozen/Paused/Cancelled</figcaption>
         </figure>
     </button>
