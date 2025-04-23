@@ -70,11 +70,11 @@ filtered_data = data[data['field'].isin(st.session_state.selected_fields)]
 
 # Add markers
 for _, row in filtered_data.iterrows():
-    iframe = IFrame(create_popup_html(row["name"], row["text"], row["img"]), width=300, height=200)
+    iframe = IFrame(create_popup_html(row["institution"], row["text"], row["img"]), width=300, height=200)
     folium.Marker(
         location=[row["lat"], row["lon"]],
         popup=folium.Popup(iframe, max_width=300),
-        tooltip=row["name"]
+        tooltip=row["institution"]
     ).add_to(m)
 
 
