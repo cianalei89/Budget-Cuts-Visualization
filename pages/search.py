@@ -11,7 +11,7 @@ st.title("Search our Database of Stories:")
 
 # load data from google sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
-data = conn.read()
+data = conn.read(ttl=3600)
 
 # create search box
 text_search = st.text_input("Search stories by institution, field, or state:", value="")

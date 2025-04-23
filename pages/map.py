@@ -10,7 +10,7 @@ from folium import IFrame
 # Load data from google sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
 
-data = conn.read()
+data = conn.read(ttl=3600)
 
 # Create a Folium map centered at the US
 m = folium.Map(location=[38.79, -99.53], zoom_start=5)
